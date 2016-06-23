@@ -1,0 +1,153 @@
+﻿<Page
+    x:Class="CookingBook.RecipeDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CookingBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <Grid x:Name="recipeDetail" MaxWidth="700">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding Name}" TextWrapping="Wrap">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            <Setter Property="FontSize" Value="20"></Setter>
+                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Image  x:Name="imageContainer" Grid.Row="1" Width="300" Height="250" >
+
+                </Image>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <local:TabHeader Grid.Column="0" Glyph="&#xE121;"  Label="Приготвяне"/>
+                    <local:TabHeader Grid.Column="1" Glyph="&#xE121;"  Label="Готвене"/>
+                    <local:TabHeader Grid.Column="2" Glyph="&#xE121;"  Label="Общо"/>
+                    <local:TabHeader Grid.Column="3" Glyph="&#xE125;"  Label="Порции"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0">
+                    <Run Text="{Binding PreparationTime}"></Run>
+                    <Run Text=" мин."></Run>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1">
+                    <Run Text="{Binding CookingTime}"></Run>
+                    <Run Text=" мин."></Run>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2">
+                    <Run Text="{Binding TotalTime}"></Run>
+                    <Run Text=" мин."></Run>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Portions}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+                <Button  Grid.Row="3" x:Name="addToFavorite" Tag="{Binding Id}"  Click="addToFavorite_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Grid x:Name="ingridientsGrid" Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Съставки">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="FontSize" Value="20"></Setter>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="TextAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="10,10,20,10"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <ListView x:Name="ingridientsListView" Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="MaxHeight" Value="25"></Setter>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid x:Name="preparationGrid" Grid.Row="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text = "Начин на проготвяне">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="FontSize" Value="20"></Setter>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="TextAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="10,10,20,10"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding Preparation}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                <Setter Property="TextAlignment" Value="Justify"></Setter>
+                                <Setter Property="Margin" Value="10,10,10,10"></Setter>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
